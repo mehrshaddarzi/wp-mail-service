@@ -419,15 +419,15 @@
                 <div class="footer">
                     <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                         <tr>
-                            <td class="content-block" style="padding-bottom:0px;">
+                            <td class="content-block" style="padding-bottom:0; line-height: 24px;">
                                 <span class="apple-link"><?php echo $footer_text; ?></span>
                             </td>
                         </tr>
-                        <tr>
+                        <!--<tr>
                             <td class="content-block powered-by">
                                 <a href="<?php echo $site_url; ?>" target="_blank"><?php echo $site_title; ?></a>
                             </td>
-                        </tr>
+                        </tr> -->
                     </table>
                 </div>
                 <!-- END FOOTER -->

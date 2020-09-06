@@ -13,27 +13,43 @@ function wp_send_mail($to, $subject, $content)
         }
     }
 
-    //Get option Send Mail
-    $opt = get_option('WP_MAIL_SERVICE_email_opt');
+    // Get Email Data
+    $email_option = apply_filters('wp_mail_service_options', array(
+        'to' => get_field('email_admin', 'option'),
+        'email_from' => get_field('email_from', 'option'),
+        'email_sender' => get_field('email_sender', 'option'),
+        'email_logo' => get_field('email_logo', 'option'),
+        'site_title' => get_field('email_site_title', 'option'),
+        'email_footer' => get_field('email_footer', 'option'),
+    ));
 
     //Set To Admin
     if ($to == "admin") {
-        $to = get_bloginfo('admin_email');
+        $to = $email_option['to'];
     }
 
     //Email from
-    $from_name = $opt['from_name'];
-    $from_email = $opt['from_email'];
+    $from_name = $email_option['email_from'];
+    $from_email = $email_option['email_sender'];
+
+    // Logo
+    $logo_attachment_id = $email_option['email_logo'];
+
+    // Check Rtl
+    $rtl = false;
+    if (is_rtl()) {
+        $rtl = true;
+    }
 
     //Template Arg
     $template_arg = array(
         'title' => $subject,
-        'logo' => $opt['email_logo'],
+        'logo' => wp_get_attachment_url($logo_attachment_id),
         'content' => $content,
-        'site_url' => home_url(),
-        'site_title' => get_bloginfo('name'),
-        'footer_text' => $opt['email_footer'],
-        'is_rtl' => (is_rtl() ? true : false)
+        'site_url' => get_site_url(),
+        'site_title' => $email_option['site_title'],
+        'footer_text' => $email_option['email_footer'],
+        'is_rtl' => $rtl
     );
 
     //Send Email

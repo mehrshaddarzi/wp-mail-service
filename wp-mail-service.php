@@ -12,6 +12,11 @@
  * Domain Path: /languages
  */
 
+// Usage:
+// https://github.com/anthonybudd/WP_Mail
+// https://github.com/leemunroe/responsive-html-email-template
+// ACF Pro For Config Page
+
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
 }
@@ -163,11 +168,7 @@ class WP_MAIL_SERVICE
         include_once dirname(__FILE__) . '/inc/config/uninstall.php';
         include_once dirname(__FILE__) . '/inc/core/utility.php';
         include_once dirname(__FILE__) . '/inc/core/wp_mail.php';
-
-        /**
-         * Load Plugin File
-         */
-        //include_once dirname(__FILE__) . '/inc/acf.php';
+        include_once dirname(__FILE__) . '/inc/acf.php';
     }
 
     /**
@@ -228,3 +229,15 @@ function WP_MAIL_SERVICE()
 
 // Global for backwards compatibility.
 $GLOBALS['wp-mail-service'] = WP_MAIL_SERVICE();
+
+// Test
+/*
+add_action('wp_loaded', function () {
+    $content = 'Hi, Mehrshad';
+    $content .= '<br />';
+    $content .= 'this is Email Test.';
+    $send = wp_send_mail('mehrshad198@gmail.com', 'Subject Email', $content);
+    var_dump($send);
+    exit;
+});
+*/
