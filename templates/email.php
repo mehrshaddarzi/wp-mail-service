@@ -157,7 +157,7 @@
             font-weight: normal;
             margin: 0;
             margin-bottom: 7px;
-            line-height: 38px;
+            line-height: 25px;
         }
 
         p li,
